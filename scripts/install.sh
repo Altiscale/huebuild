@@ -17,7 +17,6 @@ ls -s ${INSTALL_DIR}/etc/hue-${HUE_VERSION} ${INSTALL_DIR}/etc/hue
 cp ${INSTALL_DIR}/opt/hue/desktop/conf/pseudo-distributed.ini.tmpl ${INSTALL_DIR}/etc/hue/hue.ini
 ln -s ${INSTALL_DIR}/etc/hue/hue.ini ${INSTALL_DIR}/opt/hue/desktop/conf/hue.ini
 
-
 #Building RPM
 cd ${RPM_DIR}
 export RPM_NAME=vcc-hue-${ARTIFACT_VERSION}
