@@ -1,0 +1,3 @@
+[submodule "hue"]
+	path = hue
+	url = git@github.com:Altiscale/hue.git
