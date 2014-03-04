@@ -20,6 +20,6 @@ R_RPM=vcc-R_${R_MAJOR_VERSION}-${R_MINOR_VERSION}.x86_64.rpm
 
 
 rpm --initdb --dbpath ${RPM_DB_DIR}
-rpm -ivhq ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi libtidy libxml2-devel libxslt-devel openldap-devel python-devel python-simplejson sqlite-devel krb5-devel gcc gcc-c++ mysql mysql-devel cyrus-sasl-plain --prefix ${INSTALL_DIR} --dbpath ${RPM_DB_DIR} --nodeps
+rpm -ivh ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi libtidy libxml2-devel libxslt-devel openldap-devel python-devel python-simplejson sqlite-devel krb5-devel gcc gcc-c++ mysql mysql-devel cyrus-sasl-plain --prefix ${INSTALL_DIR} --dbpath ${RPM_DB_DIR} --nodeps --quiet
 
 
