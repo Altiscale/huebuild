@@ -13,6 +13,8 @@ RPM_DB_DIR=${WORKSPACE}/${JOB_NAME}-${BUILD_ID}-rpm_db
 mkdir -p ${RPM_DB_DIR}
 INSTALL_DIR=${WORKSPACE}/${JOB_NAME}-${BUILD_ID}-install
 mkdir -p ${INSTALL_DIR}
+RPM_DIR=${WORKSPACE}/${JOB_NAME}-${BUILD_ID}-rpms
+mkdir -p ${RPM_DIR}
 
 #wget setup
 WGET_OPTS="--progress=dot:mega -S -T 10 -t 5"
