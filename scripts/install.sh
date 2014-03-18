@@ -12,19 +12,12 @@ cd ${WORKSPACE}/hue
 TEMP_INSTALL_DIR=${INSTALL_DIR}
 INSTALL_DIR=${DEST_ROOT}
 PREFIX=${DEST_ROOT} make install
-﻿﻿/bin/chmod +x ./tools/relocatable.sh
+/bin/chmod +x ./tools/relocatable.sh
 ./tools/relocatable.sh
 INSTALL_DIR=${TEMP_INSTALL_DIR}
 
-﻿/usr/sbin/prelink -u ${DEST_ROOT}/build/env/bin/python
-﻿/usr/sbin/prelink -u ${DEST_ROOT}/build/env/bin/python2.6
-
-#Configuration
-#mkdir --mode=0755 -p ${INSTALL_DIR}/etc/hue-${HUE_VERSION}
-#ln -s ${INSTALL_DIR}/etc/hue-${HUE_VERSION} ${INSTALL_DIR}/etc/hue
-
-#cp ${INSTALL_DIR}/opt/hue-${HUE_VERSION}/desktop/conf/pseudo-distributed.ini.tmpl ${INSTALL_DIR}/etc/hue/hue.ini
-#ln -s ${INSTALL_DIR}/etc/hue/hue.ini ${INSTALL_DIR}/opt/hue-${HUE_VERSION}/desktop/conf/hue.ini
+/usr/sbin/prelink -u ${DEST_ROOT}/build/env/bin/python
+/usr/sbin/prelink -u ${DEST_ROOT}/build/env/bin/python2.6
 
 #Building RPM
 cd ${RPM_DIR}
