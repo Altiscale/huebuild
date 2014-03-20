@@ -16,12 +16,10 @@ PREFIX=${DEST_ROOT} make install
 ./tools/relocatable.sh
 INSTALL_DIR=${TEMP_INSTALL_DIR}
 
-/usr/sbin/prelink -u ${DEST_ROOT}/build/env/bin/python
-/usr/sbin/prelink -u ${DEST_ROOT}/build/env/bin/python2.6
-
 #Building RPM
 cd ${RPM_DIR}
-export RPM_NAME=vcc-hue-${ARTIFACT_VERSION}
+export RPM_NAME=vcc-hue-${HUE_VERSION}
+
 fpm --verbose \
 --maintainer ops@verticloud.com \
 --vendor VertiCloud \
@@ -31,7 +29,7 @@ fpm --verbose \
 -s dir \
 -t rpm \
 -n ${RPM_NAME} \
--v ${ARTIFACT_VERSION} \
+-v ${ALTISCALE_RELEASE} \
 --iteration ${DATE_STRING} \
 --rpm-user hue \
 --rpm-group hue \
