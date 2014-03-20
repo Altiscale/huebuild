@@ -1,25 +1,25 @@
 #!/bin/sh -ex
 ALTISCALE_RELEASE=${ALTISCALE_RELEASE:-0.2.0}
-HUE_VERSION=${ARTIFACT_VERSION:-3.0}
+HUE_VERSION=${ARTIFACT_VERSION:-3.5}
 
 # Destination directory
-DEST_ROOT=${INSTALL_DIR}/opt
+DEST_ROOT=${INSTALL_DIR}/opt/hue-${HUE_VERSION}
 mkdir --mode=0755 -p ${DEST_ROOT}
+#ln -s ${INSTALL_DIR}/opt/hue-${HUE_VERSION} ${INSTALL_DIR}/opt/hue
 
 #Install Hue
 cd ${WORKSPACE}/hue
+TEMP_INSTALL_DIR=${INSTALL_DIR}
+INSTALL_DIR=${DEST_ROOT}
 PREFIX=${DEST_ROOT} make install
-
-#Configuration
-mkdir --mode=0755 -p ${INSTALL_DIR}/etc/hue-${HUE_VERSION}
-ls -s ${INSTALL_DIR}/etc/hue-${HUE_VERSION} ${INSTALL_DIR}/etc/hue
-
-cp ${INSTALL_DIR}/opt/hue/desktop/conf/pseudo-distributed.ini.tmpl ${INSTALL_DIR}/etc/hue/hue.ini
-ln -s ${INSTALL_DIR}/etc/hue/hue.ini ${INSTALL_DIR}/opt/hue/desktop/conf/hue.ini
+/bin/chmod +x ./tools/relocatable.sh
+./tools/relocatable.sh
+INSTALL_DIR=${TEMP_INSTALL_DIR}
 
 #Building RPM
 cd ${RPM_DIR}
-export RPM_NAME=vcc-hue-${ARTIFACT_VERSION}
+export RPM_NAME=vcc-hue-${HUE_VERSION}
+
 fpm --verbose \
 --maintainer ops@verticloud.com \
 --vendor VertiCloud \
@@ -29,13 +29,12 @@ fpm --verbose \
 -s dir \
 -t rpm \
 -n ${RPM_NAME} \
--v ${RPM_VERSION} \
+-v ${ALTISCALE_RELEASE} \
 --iteration ${DATE_STRING} \
-${CONFIG_FILES} \
---rpm-user root \
---rpm-group root \
+--rpm-user hue \
+--rpm-group hue \
 -C ${INSTALL_DIR} \
-opt etc
+opt
 
 
 
