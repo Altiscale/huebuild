@@ -33,6 +33,7 @@ fpm --verbose \
 --iteration ${DATE_STRING} \
 --rpm-user hue \
 --rpm-group hue \
+--directories /opt/hue-${HUE_VERSION}
 -C ${INSTALL_DIR} \
 opt
 
