@@ -12,8 +12,17 @@ cd ${WORKSPACE}/hue
 TEMP_INSTALL_DIR=${INSTALL_DIR}
 INSTALL_DIR=${DEST_ROOT}
 PREFIX=${DEST_ROOT} make install
-/bin/chmod +x ./tools/relocatable.sh
+INSTALL_SUCCESS=$?
+/bin/chmod +x ${DEST_ROOT}/tools/relocatable.sh
+cd ${DEST_ROOT}
 ./tools/relocatable.sh
+RELOCATION_SUCCESS=$?
+
+if [[ $INSTALL_SUCCESS -ne 0 ]] || [[ RELOCATION_SUCCESS -ne 0 ]]; then
+    echo "Error building hue." ;
+    exit 1
+fi
+
 INSTALL_DIR=${TEMP_INSTALL_DIR}
 
 #Building RPM
@@ -36,7 +45,3 @@ fpm --verbose \
 --directories /opt/hue-${HUE_VERSION} \
 -C ${INSTALL_DIR} \
 opt
-
-
-
-
